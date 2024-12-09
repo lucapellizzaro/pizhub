@@ -37,7 +37,9 @@ export default function RootLayout({
         >
           <AuthProvider>
             <Header />
-            <main className="mb-14 mt-14 p-5">{children}</main>
+            <main className="relative flex min-h-svh flex-col p-5 pt-20">
+              {children}
+            </main>
           </AuthProvider>
         </ThemeProvider>
       </body>

@@ -90,18 +90,17 @@ export default function RegisterPage() {
 
     if (user) {
       // Salva i dettagli aggiuntivi nella tabella profiles
-      const { error: profileError } = await supabase.from("profiles").insert([
-        {
-          id: user.id,
+      const { error: profileError } = await supabase
+        .from("profiles")
+        .update({
+          firstname: values.firstName,
+          lastname: values.lastName,
           full_name: `${firstName} ${lastName}`,
-          firstname: firstName,
-          lastname: lastName,
-          address,
-          city,
-          phone,
-          role: "utente_base", // Ruolo predefinito
-        },
-      ]);
+          address: values.address,
+          city: values.city,
+          phone: values.phone,
+        })
+        .eq("id", user.id);
 
       if (profileError) {
         console.error(
@@ -117,15 +116,9 @@ export default function RegisterPage() {
     }
   };
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values);
-  }
-
   return (
     <>
-      <div>
+      <div className="mb-12">
         <h2>Registrati</h2>
 
         {success ? (
@@ -139,7 +132,7 @@ export default function RegisterPage() {
           <Form {...form}>
             <form
               onSubmit={form.handleSubmit(handleSubmit)}
-              className="mt-8 space-y-4"
+              className="mt-6 space-y-4"
             >
               {/* Campo Nome */}
               <FormField
@@ -295,8 +288,16 @@ export default function RegisterPage() {
 
               {/* Pulsante di Registrazione */}
               <div className="relative">
-                <Button type="submit" className="mt-4 w-full">
-                  Registrati
+                <Button
+                  type="submit"
+                  disabled={
+                    !form.formState.isValid || form.formState.isSubmitting
+                  }
+                  className="mt-4 w-full"
+                >
+                  {form.formState.isSubmitting
+                    ? "Registrazione in corso..."
+                    : "Registrati"}
                 </Button>
               </div>
             </form>

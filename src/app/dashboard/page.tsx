@@ -1,6 +1,7 @@
 "use client";
 
 import ProtectedRoute from "@/components/ProtectedRoute";
+import ActionFooter from "@/components/theme/ActionFooter";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/context/AuthContext";
 
@@ -9,12 +10,18 @@ export default function Dashboard() {
 
   return (
     <ProtectedRoute>
-      <div>
-        <h1>Benvenuto!</h1>
-        <div className="mt-4">
+      <>
+        <section className="relative flex-1">
+          <h1>Impostazioni</h1>
+          <p>Benvenuto, qui puoi gestire la tue preferenze.</p>
+        </section>
+        <ActionFooter>
+          <Button variant={"outline"} onClick={signOut}>
+            LogOut
+          </Button>
           <Button onClick={signOut}>LogOut</Button>
-        </div>
-      </div>
+        </ActionFooter>
+      </>
     </ProtectedRoute>
   );
 }

@@ -1,6 +1,7 @@
 "use client";
 
 import ProtectedRoute from "@/components/ProtectedRoute";
+import ActionFooter from "@/components/theme/ActionFooter";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
@@ -29,15 +30,20 @@ export default function EmailPage() {
 
   return (
     <ProtectedRoute>
-      <div>
-        <h1>Profilo utente</h1>
-        <p className="mt-2">
-          La tua email è: <span className="font-bold">{user.email}</span>
-        </p>
-        <div className="mt-4">
+      <>
+        <section className="relative flex-1">
+          <h1>Profilo utente</h1>
+          <p>
+            La tua email è: <span className="font-bold">{user.email}</span>
+          </p>
+        </section>
+        <ActionFooter>
+          <Button variant={"outline"} onClick={signOut}>
+            LogOut
+          </Button>
           <Button onClick={signOut}>LogOut</Button>
-        </div>
-      </div>
+        </ActionFooter>
+      </>
     </ProtectedRoute>
   );
 }

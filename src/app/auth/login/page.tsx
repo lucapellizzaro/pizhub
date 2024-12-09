@@ -57,15 +57,14 @@ export default function LoginPage() {
   };
 
   return (
-    <div>
+    <div className="mb-12">
       <h2>Accedi</h2>
-      {error && <p className="mb-4 text-sm text-red-500">{error}</p>}
 
       {/* Form di Login */}
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(handleLogin)}
-          className="mt-8 space-y-4"
+          className="mt-6 space-y-4"
         >
           {/* Campo Email */}
           <FormField
@@ -114,8 +113,12 @@ export default function LoginPage() {
           />
           <div className="relative">
             {/* Pulsante di Registrazione */}
-            <Button type="submit" className="mt-4 w-full">
-              Accedi
+            <Button
+              type="submit"
+              disabled={!form.formState.isValid || form.formState.isSubmitting}
+              className="mt-4 w-full"
+            >
+              {form.formState.isSubmitting ? "Accesso in corso..." : "Accedi"}
             </Button>
           </div>
         </form>
@@ -128,6 +131,7 @@ export default function LoginPage() {
           Registrati
         </Button>
       </Form>
+      {error && <p className="mb-4 text-sm text-red-500">{error}</p>}
     </div>
   );
 }

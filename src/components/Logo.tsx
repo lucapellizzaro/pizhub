@@ -7,10 +7,10 @@ const Logo: React.FC<React.SVGProps<SVGElement>> = (props) => (
     height="96"
     fill="none"
     viewBox="0 0 324 96"
-    className="h-8 w-auto"
+    className="h-9 w-auto"
   >
     <path
-      fill="#FF4D00"
+      fill="#f97316"
       d="M0 10C0 4.477 4.477 0 10 0h76c5.523 0 10 4.477 10 10v76c0 5.523-4.477 10-10 10H10C4.477 96 0 91.523 0 86z"
     ></path>
     <path
